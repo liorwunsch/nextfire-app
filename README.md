@@ -7,3 +7,8 @@ Based on the work of Fireship:</br>
 
 # Authors
 - Lior Wunsch
+
+```bash
+npx create-next-app nextfire-app
+npm run dev
+```
