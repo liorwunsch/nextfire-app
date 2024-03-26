@@ -5,6 +5,9 @@ import { UserContext } from '../lib/context'
 
 export default function Enter(props) {
   const { user, username } = useContext(UserContext)
+  if (user) {
+    console.log('--- user.email = ' + user.email)
+  }
 
   // 1. user signed out <SignInButton />
   // 2. user signed in, but missing username <UsernameForm />
