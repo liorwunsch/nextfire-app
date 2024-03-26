@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/Link'
+import { useContext } from 'react'
+import { UserContext } from '../lib/context'
 
 // Top navbar
 export default function Navbar() {
-  //const { user, username } = {}
-  const user = null
-  const username = null
-
+  const { user, username } = useContext(UserContext)
+  
   return (
     <nav className="navbar">
       <ul>
