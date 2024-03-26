@@ -1,24 +1,19 @@
 import { auth, googleAuthProvider } from '../lib/firebase'
 import { signInWithPopup, signOut } from "firebase/auth"
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { UserContext } from '../lib/context'
+import Loader from '../components/Loader.js'
+import { toast } from 'react-hot-toast'
 
 export default function Enter(props) {
-  const { user, username } = useContext(UserContext)
+  const { user } = useContext(UserContext) // gets user and username from global context from hooks
   if (user) {
-    console.log('--- user.email = ' + user.email)
+    console.log('--- user.email = ', user.email)
   }
 
-  // 1. user signed out <SignInButton />
-  // 2. user signed in, but missing username <UsernameForm />
-  // 3. user signed in, has username <SignOutButton />
   return (
     <main>
-      {!user ?
-        <SignInButton />
-        :
-        !username ? <UsernameForm /> : <SignOutButton />
-      }
+      {!user ? <SignInButton /> : <SignOutButton /> }
     </main>
   )
 }
@@ -41,17 +36,26 @@ function SignInButton() {
 
 // Sign out button
 function SignOutButton() {
-  return (
-    <button
-      onClick={() =>
-        signOut(auth)
-      }
-    >
-      Sign Out
-    </button>
-  )
-}
+  const [loading, setLoading] = useState(false)
+  const { username } = useContext(UserContext)
 
-function UsernameForm() {
-  return null
+  useEffect(() => {
+    setLoading(!username)
+    if (username) {
+      toast.success('Signed In')
+    }
+  }, [username])
+
+  return (
+    <div>
+      <p>Hello, {username} {loading && <Loader show />}</p>
+      <button
+        onClick={() =>
+          signOut(auth)
+        }
+      >
+        Sign Out
+      </button>
+    </div>
+  )
 }

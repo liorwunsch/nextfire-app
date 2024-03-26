@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+//import Head from 'next/head'
+//import styles from '../styles/Home.module.css'
 import Link from 'next/Link'
 import Loader from '../components/Loader.js'
-
 import { toast } from 'react-hot-toast'
 
 export default function Home() {
